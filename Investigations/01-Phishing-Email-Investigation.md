@@ -204,38 +204,18 @@ The screeshot as seen below is teh attack timeline.
 
 ## Attack Chain
 
-Phishing Email
-        │
-        ▼
-Google Drive link opened
-        │
-        ▼
-Payload downloaded from Google Drive
-        │
-        ▼
-microsoft.exe / microsoft (2).exe staged
-        │
-        ▼
-Execution of downloaded payload
-        │
-        ▼
-Meterpreter activity detected
-        │
-        ▼
-Communication with external IP 45.142.193.145
-        │
-        ▼
-Post-compromise activity observed
-        ├── Outbound communication attempts (TCP 444)
-        └── Defender behavioral detections triggered
-                │
-                ▼
-Microsoft Defender detects Trojan:Win32/Meterpreter.A
-                │
-                ▼
-Endpoint automatically isolated
-
----
+- Phishing email received
+- User opened Google Drive link
+- Payload downloaded from Google Drive
+- File `microsoft.exe / microsoft (2).exe` staged on endpoint
+- Execution of downloaded payload
+- Meterpreter activity observed
+- Communication detected with external IP 45.142.193.145
+- Post-compromise activity observed:
+  - Outbound TCP 444 connections
+  - Defender behavioral detections triggered
+- Microsoft Defender detected: Trojan:Win32/Meterpreter.A
+- Endpoint automatically isolated
 
 ## Findings
 
