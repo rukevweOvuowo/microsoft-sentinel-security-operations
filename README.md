@@ -67,8 +67,8 @@ The following investigations document security monitoring, threat detection, inc
 
 ### Identity Security
 
-- [02 - Impossible Travel Investigation](Investigations/02-Impossible-Travel-Investigation.md)
-- [03 - Brute Force Attack Investigation](Investigations/03-Brute-Force-Attack-Investigation.md)
+- [02 - Brute Force Attack Investigation](Investigations/02-Brute-Force-Attack-Investigation.md)
+- [03 - ](Investigations/03-.md)
 
 ### Endpoint Security
 
@@ -85,7 +85,7 @@ The following investigations document security monitoring, threat detection, inc
 
 ### Incident Response
 
-- [08 - Ransomware Investigation](Investigations/08-Ransomware-Investigation.md)
+- [08 - Ransomware Investigation](Investigations/08-.md)
 - [09 - Insider Threat Investigation](Investigations/09-Insider-Threat-Investigation.md)
 - [10 - Incident Response Case Study](Investigations/10-Incident-Response-Case-Study.md)
 
