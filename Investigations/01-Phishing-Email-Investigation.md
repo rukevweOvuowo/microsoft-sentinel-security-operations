@@ -235,3 +235,6 @@ The screeshot as seen below is teh attack timeline.
 The investigation confirmed a phishing-based malware delivery attempt using Google Drive as the initial payload hosting mechanism. Microsoft Edge downloaded the malicious file, which was staged locally and executed as a Meterpreter payload. The execution attempted post-exploitation behavior, including command-and-control communication and system interaction patterns consistent with Meterpreter activity.
 
 Microsoft Defender for Endpoint successfully detected the malicious activity and blocked execution, preventing further compromise. Correlation across Defender XDR telemetry confirmed the attack chain remained contained to the initial endpoint, with no evidence of lateral movement or persistence established.
+
+
+Next is: [02 - Impossible Travel Investigation](Investigations/02-Brute-Force-Attack-Investigation.md)
