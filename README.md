@@ -68,6 +68,7 @@ The following investigations document security monitoring, threat detection, inc
 ### Identity Security
 
 - [02 - Brute Force Attack Investigation](Investigations/02-Brute-Force-Attack-Investigation.md)
+
 - [03 - ](Investigations/03-.md)
 
 ### Endpoint Security
@@ -93,7 +94,7 @@ The following investigations document security monitoring, threat detection, inc
 
 ## Repository Structure
 
-- [Investigations](Exercises/)
+- [Investigations](Investigations/)
 - [Images](Images/)
 - [Queries](Queries/)
 
