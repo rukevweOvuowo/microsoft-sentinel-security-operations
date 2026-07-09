@@ -237,4 +237,4 @@ The investigation confirmed a phishing-based malware delivery attempt using Goog
 Microsoft Defender for Endpoint successfully detected the malicious activity and blocked execution, preventing further compromise. Correlation across Defender XDR telemetry confirmed the attack chain remained contained to the initial endpoint, with no evidence of lateral movement or persistence established.
 
 
-Next is: [02 - Brute Force Attack Investigation](./02-Brute-Force-Attack-Investigation.md)
+Next: [02 - Brute Force Attack Investigation](./02-Brute-Force-Attack-Investigation.md)
