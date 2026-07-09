@@ -195,9 +195,9 @@ The activity appears limited to unauthorized authentication.
 
 ---
 
-# Block suspicious IP
+# Block Suspicious IP Address
 
-As seen in the screenshot below, go to endpoint, then IP addresse then add in the address of the suspicuous email taht needs to be block as seen in the screesnhot below. 
+As shown in the screenshot below, navigate to **Endpoints → IP Addresses** and add the suspicious IP address that needs to be blocked.
 
 ![alt text](../Images/02-Brute-Force-Attack-Investigation.md/In.png)
 ---
