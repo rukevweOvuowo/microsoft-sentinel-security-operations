@@ -107,11 +107,11 @@ Investigation confirmed multiple failed attempts followed by successful authenti
 
 - **181.115.199.122** – Multiple failed authentication attempts followed by a successful login were observed, as shown below.
 
-![Multiple failed authentication attempts from 181.115.199.122]![alt text](../Images/02-Brute-Force-Attack-Investigation.md/6P.png)
+![alt text](../Images/02-Brute-Force-Attack-Investigation.md/6P.png)
 
 The successful logon event is shown below.
 
-![Successful logon event]![alt text](../Images/02-Brute-Force-Attack-Investigation.md/5P.png)
+![alt text](../Images/02-Brute-Force-Attack-Investigation.md/5P.png)
 
 - **84.192.175.75** – Multiple failed authentication attempts followed by a successful login were observed.
 
@@ -233,4 +233,4 @@ Failed brute-force attempt with no successful authentication.
 
 Successful brute-force authentication confirmed. No post-exploitation activity identified.
 
-Previous: [01 - Phishing Email Investigation](Investigations/01-Phishing-Email-Investigation.md)
+Previous: [01 - Phishing Email Investigation](./01-Phishing-Email-Investigation.md)
