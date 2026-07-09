@@ -195,6 +195,14 @@ The activity appears limited to unauthorized authentication.
 
 ---
 
+# Block suspicious IP
+
+As seen in the screenshot below, go to endpoint, then IP addresse then add in the address of the suspicuous email taht needs to be block as seen in the screesnhot below. 
+
+![alt text](../Images/02-Brute-Force-Attack-Investigation.md/In.png)
+---
+
+
 # Verdict
 
 **Classification: True Positive – Successful Unauthorized Authentication**
@@ -207,15 +215,12 @@ Although valid credentials were used, no evidence of further attacker activity w
 
 ---
 
-# Recommended Actions
+---
 
-1. Reset affected account credentials.
-2. Enable MFA for remote access.
-3. Review account permissions.
-4. Monitor affected accounts for suspicious activity.
-5. Block or monitor identified IP addresses.
-6. Review RDP/SMB exposure.
-7. Check for persistence mechanisms after successful logons.
+# Recommended Actions
+1. Block suspicious IP addresses.
+2. Review RDP/SMB exposure.
+
 
 ---
 
