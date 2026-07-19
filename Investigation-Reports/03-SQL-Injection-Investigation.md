@@ -1,4 +1,4 @@
-# SQL Injection Incident Investigation Report Version 1.0 
+# SQL Injection Incident Investigation Report
 
 ## Microsoft Sentinel SOC Investigation
 
@@ -119,14 +119,13 @@ Observed payload
 ```kusto
 Suricata_CL
 | where RawData has "/rest/products/search?q=%27%20OR%201%3D1--"
-
+```
 
 Observed
 
 ```
 /rest/products/search?q=%27%20OR%201%3D1--
 
-```
 ```
 
 ---
