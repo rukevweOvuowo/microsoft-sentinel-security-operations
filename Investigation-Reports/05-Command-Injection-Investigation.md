@@ -1,4 +1,4 @@
-# Command Injection Investigation Report
+# 05 - Command Injection Investigation
 
 **Author:** Ovuowo Rukevwe  
 **Role:** SOC Analyst (Security Home Lab Project)  
@@ -58,7 +58,6 @@ The detection logic searched for common command execution indicators including:
 ||
 $( )
 `
-
 ```
 
 and system commands such as:
@@ -436,5 +435,3 @@ Previous:
 [01 - Phishing Email Investigation](./04-XSS-Investigation.md)
 
 Next:
-
-[03 - Web Application Attack Investigation](./06)

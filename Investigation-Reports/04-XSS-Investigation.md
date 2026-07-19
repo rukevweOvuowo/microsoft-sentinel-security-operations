@@ -1,4 +1,4 @@
-# 04 - Cross-Site Scripting (XSS) Investigation Report
+# 04 - Cross-Site Scripting (XSS) Investigation
 
 **Author:** Ovuowo Rukevwe  
 **Role:** SOC Analyst (Security Home Lab Project)  
