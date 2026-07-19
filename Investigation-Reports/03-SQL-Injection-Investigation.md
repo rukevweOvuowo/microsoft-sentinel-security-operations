@@ -1,8 +1,5 @@
 # SQL Injection Incident Investigation Report
 
-## Microsoft Sentinel SOC Investigation
-
----
 
 # Incident Overview
 
