@@ -38,7 +38,7 @@ The incident was therefore classified as an **Attempted Cross-Site Scripting (XS
 
 ---
 
-# Investigation Methodology
+# 1. Investigation Methodology
 
 The investigation followed the workflow below:
 
