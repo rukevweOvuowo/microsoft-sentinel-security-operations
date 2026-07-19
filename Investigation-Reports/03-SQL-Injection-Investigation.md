@@ -1,4 +1,4 @@
-# SQL Injection Incident Investigation Report
+# 03 - SQL Injection Incident Investigation
 
 **Author:** Ovuowo Rukevwe  
 **Role:** SOC Analyst (Security Home Lab Project)  
