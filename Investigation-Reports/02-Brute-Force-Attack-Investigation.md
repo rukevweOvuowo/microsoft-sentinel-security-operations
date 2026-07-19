@@ -1,121 +1,259 @@
-# Brute Force Attack Investigations
+# 02 – Brute Force Attack Investigation
 
-## Overview
-
-This document summarizes two brute-force investigations detected by Microsoft Defender XDR and Microsoft Sentinel.
-
-Cases investigated:
-
-1. **Case 1: Failed Brute Force Attempt (False Positive)**
-2. **Case 2: Brute Force Attack Resulting in Successful Authentication (True Positive)**
+**Author:** Ovuowo Rukevwe  
+**Role:** SOC Analyst (Security Home Lab Project)  
+**Platform:** Microsoft Sentinel / Microsoft Defender XDR   
+**Date of Investigation:** 6 July 2026  
+**Incident Category:** Credential Access  
+**Severity:** Medium  
+**Status:** Closed – Investigated and Classified  
 
 ---
 
-# Case 1: Failed Brute Force Attempt (False Positive)
+# Executive Summary
+
+Microsoft Defender XDR and Microsoft Sentinel detected multiple authentication anomalies involving repeated failed login attempts against the **West-EU** server.
+
+Two separate brute-force investigations were analyzed:
+
+1. **Case 1 – Failed Brute Force Attempt (False Positive)**
+2. **Case 2 – Successful Authentication Following Brute Force Activity (True Positive)**
+
+The investigation involved reviewing:
+
+- Windows Security Events
+- Microsoft Defender XDR telemetry
+- Microsoft Sentinel incidents
+- Threat intelligence enrichment
+- Authentication timelines
+
+The first case involved repeated failed authentication attempts from a suspicious external IP address. No valid credentials were obtained and no compromise occurred.
+
+The second case confirmed successful authentication after multiple failed login attempts from external IP addresses. The activity was classified as a **True Positive** because valid credentials were successfully used.
+
+Further investigation found no evidence of:
+
+- Malware execution
+- Privilege escalation
+- Persistence
+- Lateral movement
+- Data exfiltration
+
+The confirmed impact was limited to unauthorized authentication.
+
+
+---
+
+# Detection Logic
+
+Microsoft Sentinel and Microsoft Defender XDR detected brute-force activity by analyzing authentication telemetry.
+
+The detection logic focused on:
+
+- Multiple failed authentication attempts within a short period.
+- Repeated authentication attempts from external IP addresses.
+- Successful authentication following repeated failures.
+
+Key telemetry sources:
+
+- Windows Security Events (Event ID 4625)
+- Successful logon events
+- Defender XDR identity telemetry
+- Threat intelligence enrichment
+
+The confidence level increased when failed attempts were followed by successful authentication from suspicious external IP addresses.
+
+---
+
+# Incident Overview
+
+| Field | Value |
+|---|---|
+| Incident Name | Brute Force Authentication Investigation |
+| Category | Credential Access |
+| Detection Platform | Microsoft Sentinel / Defender XDR |
+| Target | West-EU Server |
+| Attack Technique | Brute Force |
+| MITRE ATT&CK | T1110 |
+| Status | Closed |
+
+---
+
+# Investigation Methodology
+
+The investigation followed the SOC workflow:
+
+1. Review Microsoft Sentinel incident details.
+2. Identify source IP addresses involved.
+3. Analyze authentication events.
+4. Validate successful or failed login attempts.
+5. Enrich suspicious IP addresses with threat intelligence.
+6. Review post-authentication activity.
+7. Determine impact and classify the incident.
+
+---
+
+# Investigation Questions
+
+The investigation focused on answering the following SOC questions:
+
+### 1. Who initiated the attack?
+
+- Which external IP addresses generated authentication attempts?
+- Were the sources known malicious?
+
+### 2. What happened?
+
+- Were multiple failed authentication attempts observed?
+- Were valid credentials successfully used?
+
+### 3. Did compromise occur?
+
+- Was unauthorized authentication successful?
+- Which accounts were accessed?
+
+### 4. What happened after access?
+
+The investigation checked for:
+
+- Malware execution
+- Privilege escalation
+- Persistence
+- Lateral movement
+- Data exfiltration
+
+---
+
+# Case 1 Severity:Medium – Failed Brute Force Attempt
 
 ## Incident Summary
 
-Microsoft Defender XDR detected multiple failed authentication attempts from an external IP address targeting the **West-EU** host.
+Microsoft Defender XDR detected repeated failed authentication attempts targeting the West-EU server.
 
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/incident.png)
+![Incident](../Images/02-Brute-Force-Attack-Investigation.md/incident.png)
 
-| Attribute   | Details           |
-| ----------- | ----------------- |
-| Incident ID | 30                |
-| Source IP   | 80.94.95.83       |
-| Severity    | Medium            |
-| Category    | Credential Access |
 
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/3FD.png)
-
-Threat intelligence identified the IP as suspicious:
-
-* Network: SS-Net
-* ASN: 204428
-* Location: United Kingdom
-* 15/91 security vendors flagged the IP as malicious
-
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/4FD.png)
+| Attribute | Details |
+|---|---|
+| Incident ID | 30 |
+| Source IP | 80.94.95.83 |
+| Severity | Medium |
+| Category | Credential Access |
+| Technique | T1110 – Brute Force |
 
 ---
 
-## Investigation Findings
+# Threat Intelligence Analysis
 
-Security logs were reviewed to determine whether the attack resulted in unauthorized access.
+The source IP was investigated using threat intelligence.
 
 Findings:
 
-* Multiple failed authentication attempts detected.
+- Network: SS-Net
+- ASN: 204428
+- Location: United Kingdom
+- Multiple security vendors flagged the IP as suspicious
 
-* Windows Event ID **4625** confirmed multiple failed logons from this external IP address.
-
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/1FD.png)
-
-* No successful authentication events were identified.
-
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/2FD.png)
-
-* No evidence of account compromise or post-authentication activity was found.
----
-
-## Impact Assessment
-
-| Finding               | Status         |
-| --------------------- | -------------- |
-| Brute-force attempt   | Confirmed      |
-| Failed authentication | Confirmed      |
-| Successful login      | Not detected   |
-| Credential compromise | Not identified |
-| System impact         | None observed  |
+![Threat Intelligence](../Images/02-Brute-Force-Attack-Investigation.md/4FD.png)
 
 ---
 
-## Verdict
+# Authentication Log Analysis
 
-**Classification: False Positive – Failed Brute Force Attempt**
+Windows Security Events were reviewed.
 
-The attacker failed to obtain valid credentials. No unauthorized access or compromise was identified.
+Observed:
 
-**Closure Status:** Closed – False Positive
+- Multiple failed authentication attempts.
+- Windows Event ID:
 
----
 
-# Case 2: Brute Force Attack Resulting in Successful Authentication (True Positive)
+4625 - Failed Logon Attempt
 
-## Incident Summary
 
-Microsoft Defender XDR and Microsoft Sentinel detected brute-force authentication attempts targeting the **West-EU** server.
+![Failed Logons](../Images/02-Brute-Force-Attack-Investigation.md/1FD.png)
 
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/1P.png)
 
-| Attribute    | Details             |
-| ------------ | ------------------- |
-| Incident ID  | 37                  |
-| Severity     | Medium              |
-| Category     | Credential Access   |
-| MITRE ATT&CK | T1110 – Brute Force |
+No successful authentication events were identified.
 
-Investigation confirmed multiple failed attempts followed by successful authentication from external IP addresses.
+![No Successful Login](../Images/02-Brute-Force-Attack-Investigation.md/2FD.png)
 
 ---
 
-# Source Investigation
+# Case 1 Impact Assessment
 
-- **78.46.102.154** – Multiple failed authentication attempts were observed.
+| Finding | Status |
+|---|---|
+| Brute-force activity | Confirmed |
+| Failed authentication | Confirmed |
+| Successful login | Not detected |
+| Account compromise | Not identified |
+| System impact | None observed |
 
-- **80.94.95.83** – Multiple failed authentication attempts were observed.
+---
 
-- **181.115.199.122** – Multiple failed authentication attempts followed by a successful login were observed, as shown below.
+# Case 1 Verdict
 
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/6P.png)
+## Classification:
 
-The successful logon event is shown below.
+**False Positive – Failed Brute Force Attempt**
 
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/5P.png)
+The activity was identified as malicious authentication behavior; however, the attacker failed to obtain valid credentials.
 
-- **84.192.175.75** – Multiple failed authentication attempts followed by a successful login were observed.
+No unauthorized access occurred.
 
-- **34.77.166.77** – Multiple failed authentication attempts followed by a successful login were observed.
+**Closure Status: Closed – False Positive**
+
+
+# Case 2 Severity: High: Successful Authentication After Brute Force
+
+---
+
+# Incident Summary
+
+Microsoft Defender XDR detected repeated authentication attempts followed by successful logins against the West-EU server.
+
+![Incident](../Images/02-Brute-Force-Attack-Investigation.md/1P.png)
+
+| Attribute | Details |
+|---|---|
+| Incident ID | 37 |
+| Severity | Medium |
+| Category | Credential Access |
+| Technique | T1110 – Brute Force |
+
+---
+
+# Source IP Investigation
+
+Multiple external IP addresses were associated with brute-force activity.
+
+| Source IP | Activity |
+|---|---|
+| 78.46.102.154 | Multiple failed authentication attempts |
+| 80.94.95.83 | Multiple failed authentication attempts |
+| 181.115.199.122 | Failed attempts followed by successful login |
+| 84.192.175.75 | Failed attempts followed by successful login |
+| 34.77.166.77 | Failed attempts followed by successful login |
+
+---
+
+# Successful Authentication Evidence
+
+The investigation confirmed successful authentication events from:
+
+
+181.115.199.122
+
+84.192.175.75
+
+34.77.166.77
+
+
+
+Example:
+
+![Successful Authentication](../Images/02-Brute-Force-Attack-Investigation.md/5P.png)
 
 ---
 
@@ -123,104 +261,158 @@ The successful logon event is shown below.
 
 ## 181.115.199.122
 
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/2P.png)
+Findings:
 
-* Registered to Empresa Nacional de Telecomunicaciones Sociedad Anonima (ENTEL).
-* Located in Bolivia.
-* Historical threat intelligence observations identified.
-* Successful remote authentication detected.
+- Registered to Empresa Nacional de Telecomunicaciones Sociedad Anonima (ENTEL)
+- Located in Bolivia
+- Historical malicious activity observed
+- Successful authentication detected
+
+![Threat Intelligence](../Images/02-Brute-Force-Attack-Investigation.md/2P.png)
+
+
+---
 
 ## 34.77.166.77
 
-* Associated with Google Cloud infrastructure.
-* Historical exposure of remote access services identified.
-* Services observed included SSH, RDP, and web services.
-* Successful authentication detected.
+Findings:
+
+- Associated with Google Cloud infrastructure
+- Previous exposure of remote access services
+- Services observed:
+
+
+SSH
+RDP
+Web Services
+
+
+
+
+Successful authentication detected.
+
+---
 
 ## 84.192.175.75
 
-* Multiple failed authentication attempts followed by successful authentication.
+Findings:
+
+- Multiple failed authentication attempts.
+- Followed by successful authentication.
 
 ---
 
-# Investigation Findings
+# Post Authentication Investigation
 
-Authentication logs and endpoint telemetry were reviewed.
+After confirming successful authentication, additional telemetry was reviewed.
 
-Confirmed:
+Reviewed:
 
-* Multiple external IPs performed brute-force attempts.
-* Multiple accounts were targeted.
-* Successful authentication occurred from:
+- Defender Timeline
+- Sentinel logs
+- Windows Security Events
 
-```
-181.115.199.122
-84.192.175.75
-34.77.166.77
-```
+No evidence was identified for:
 
-The successful logons indicate that valid credentials were accepted.
-
----
-
-# Post-Authentication Investigation
-
-Defender Timeline, Sentinel logs, and security events were reviewed.
-
-No evidence was found of:
-
-* Privilege escalation
-* Malware execution
-* PowerShell abuse
-* Credential dumping
-* Persistence creation
-* Lateral movement
-* Data exfiltration
-
-The activity appears limited to unauthorized authentication.
+❌ Privilege escalation  
+❌ Malware execution  
+❌ PowerShell abuse  
+❌ Credential dumping  
+❌ Persistence creation  
+❌ Lateral movement  
+❌ Data exfiltration  
 
 ---
 
 # Impact Assessment
 
-| Finding                   | Status       |
-| ------------------------- | ------------ |
-| Brute-force activity      | Confirmed    |
-| Failed authentication     | Confirmed    |
-| Successful authentication | Confirmed    |
-| Credential compromise     | Confirmed    |
-| Post-exploitation         | Not observed |
-| Malware execution         | Not observed |
-| Data exfiltration         | Not observed |
+| Finding | Status |
+|---|---|
+| Brute-force activity | Confirmed |
+| Failed authentication attempts | Confirmed |
+| Successful authentication | Confirmed |
+| Credential compromise | Confirmed |
+| Malware execution | Not observed |
+| Persistence | Not observed |
+| Lateral movement | Not observed |
+| Data exfiltration | Not observed |
 
 ---
 
-# Block Suspicious IP Address
+# Attack Timeline
 
-As shown in the screenshot below, navigate to **Endpoints → IP Addresses** and add the suspicious IP address that needs to be blocked.
+| Event | Description |
+|---|---|
+| Initial activity | Multiple failed login attempts detected |
+| Enumeration phase | Multiple authentication attempts against accounts |
+| Compromise | Valid credentials accepted |
+| Investigation | Endpoint and authentication telemetry reviewed |
+| Response | Suspicious IP addresses blocked |
 
-![alt text](../Images/02-Brute-Force-Attack-Investigation.md/In.png)
 ---
 
+# Indicators and Attack Artifacts
 
-# Verdict
+| IOC Type | Indicator | Description |
+|---|---|---|
+| IP Address | 80.94.95.83 | Source of failed brute-force attempt |
+| IP Address | 181.115.199.122 | Successful authentication source |
+| IP Address | 84.192.175.75 | Successful authentication source |
+| IP Address | 34.77.166.77 | Successful authentication source |
+| Event ID | 4625 | Failed Windows authentication |
+| Technique | T1110 | Brute Force |
+
+---
+
+# Response Actions
+
+Actions performed:
+
+- Investigated authentication activity.
+- Reviewed successful login events.
+- Performed threat intelligence enrichment.
+- Blocked suspicious IP addresses.
+
+![IP Blocking](../Images/02-Brute-Force-Attack-Investigation.md/In.png)
+
+
+---
+
+# Lessons Learned
+
+The investigation highlighted the following security improvements:
+
+- Multi-factor authentication significantly reduces the risk of compromised credentials being abused.
+
+- Authentication monitoring should detect abnormal login patterns such as repeated failures followed by successful access.
+
+- Threat intelligence enrichment helps identify suspicious external sources and improve incident confidence.
+
+- Successful authentication after brute-force activity should be treated as potential account compromise until validated.
+
+- Remote access services should be regularly reviewed and restricted where unnecessary.
+
+---
+
+# Final Verdict
+
+## Case 1
+
+**Classification: False Positive – Failed Brute Force Attempt**
+
+Repeated authentication attempts occurred, but no valid credentials were obtained.
+
+---
+
+## Case 2
 
 **Classification: True Positive – Successful Unauthorized Authentication**
 
-The incident was confirmed as a brute-force attack that resulted in successful authentication from three external IP addresses.
+The investigation confirmed that brute-force activity resulted in successful authentication from multiple external IP addresses.
 
-Although valid credentials were used, no evidence of further attacker activity was identified.
+Although valid credentials were used, no additional malicious activity was identified after access was obtained.
 
-**Confirmed impact: Unauthorized account access only.**
-
----
-
----
-
-# Recommended Actions
-1. Block suspicious IP addresses.
-2. Review RDP/SMB exposure.
-
+**Confirmed Impact: Unauthorized Account Access Only**
 
 ---
 
@@ -228,14 +420,29 @@ Although valid credentials were used, no evidence of further attacker activity w
 
 ## Case 1
 
-**Closed – False Positive**
-
-Failed brute-force attempt with no successful authentication.
+✅ Closed – False Positive
 
 ## Case 2
 
-**Closed – True Positive**
+✅ Closed – True Positive
 
-Successful brute-force authentication confirmed. No post-exploitation activity identified.
+---
 
-Previous: [01 - Phishing Email Investigation](./01-Phishing-Email-Investigation.md)
+# Recommended Actions
+
+1. Enable multi-factor authentication.
+2. Review exposed remote access services.
+3. Implement account lockout policies.
+4. Monitor impossible travel authentication events.
+5. Block confirmed malicious IP addresses.
+6. Review privileged account exposure.
+
+---
+
+Previous:
+
+[01 - Phishing Email Investigation](./01-Phishing-Email-Investigation.md)
+
+Next:
+
+[03 - Web Application Attack Investigation](./03-SQL-Injection-Investigation.md)

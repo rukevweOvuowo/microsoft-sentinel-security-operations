@@ -1,8 +1,8 @@
 # Cross-Site Scripting (XSS) Investigation Report
 
 **Author:** Ovuowo Rukevwe  
-**Role:** SOC Analyst (Portfolio Project)  
-**Platform:** Microsoft Sentinel  
+**Role:** SOC Analyst (Security Home Lab Project)  
+**Platform:** Microsoft Sentinel / Microsoft Defender XDR  
 **Date of Investigation:** 17 July 2026  
 **Incident Severity:** High  
 **Incident Status:** Closed – Attempt Detected, No Confirmed Compromise
@@ -38,6 +38,21 @@ The incident was therefore classified as an **Attempted Cross-Site Scripting (XS
 
 ---
 
+# Detection Logic
+
+Microsoft Sentinel detected the XSS attempt by analyzing web application traffic from multiple telemetry sources:
+
+- Nginx Access Logs
+- Zeek HTTP Logs
+- Suricata IDS
+
+The detection logic identified common XSS indicators including:
+
+<script> javascript: document.cookie alert() onerror= onload= ``` URL decoding was performed to identify obfuscated payloads. Example: Encoded: ``` %3Cscript%3Ealert(document.cookie)%3C/script%3E ``` Decoded: ```html <script>alert(document.cookie)</script>
+
+
+Detection confidence was increased by correlating identical malicious payloads across independent security sources.
+
 # 1. Investigation Methodology
 
 The investigation followed the workflow below:
@@ -49,6 +64,40 @@ The investigation followed the workflow below:
 5. Assess whether the payload executed successfully.
 6. Determine the overall impact.
 7. Document findings and recommendations.
+
+
+---
+
+# Investigation Questions
+
+The investigation focused on answering the following SOC questions:
+
+### 1. Who initiated the attack?
+
+- What source IP generated the malicious requests?
+- Was the activity from an internal or external host?
+
+### 2. What was the attacker attempting?
+
+- What XSS payload was submitted?
+- Was the payload attempting script execution or cookie theft?
+
+### 3. Did the attack succeed?
+
+- Was JavaScript execution confirmed?
+- Were session cookies accessed?
+- Was any user account compromised?
+
+### 4. Was additional malicious activity observed?
+
+The source IP was reviewed for related activity including:
+
+- SQL Injection
+- Command Injection
+- Path Traversal
+- Sensitive file discovery
+- Authentication attacks
+
 
 ---
 
@@ -223,7 +272,7 @@ The payload represents a classic reflected XSS attempt targeting session cookies
 ---
 
 
-# Indicators of Compromise (IOC)
+# Indicators and Attack Artifacts
 
 The following indicators were identified during the investigation of the Cross-Site Scripting (XSS) attack attempt.
 
@@ -265,6 +314,21 @@ The following indicators were identified during the investigation of the Cross-S
 
 
 ---
+# Lessons Learned
+
+The investigation highlighted the following security lessons:
+
+- Web applications should implement strong input validation and output encoding to prevent XSS attacks.
+
+- URL decoding is essential during investigation because attackers commonly encode malicious payloads.
+
+- Multiple telemetry sources improve detection confidence and reduce false positives.
+
+- Security monitoring should focus not only on attack attempts but also on determining whether exploitation was successful.
+
+- Web application logs provide valuable visibility into attacker behavior and should be continuously monitored.
+
+---
 
 # Final Assessment
 
@@ -273,3 +337,12 @@ The investigation confirmed multiple Cross-Site Scripting (XSS) attempts targeti
 Although the payloads successfully reached the application, there was no evidence to indicate successful script execution, session hijacking, or data exfiltration.
 
 **Final Classification:** **Attempted Cross-Site Scripting (XSS) Attack – No Confirmed Compromise**
+
+
+Previous:
+
+[01 - Phishing Email Investigation](./03-SQL-Injection-Investigation.md)
+
+Next:
+
+[03 - Web Application Attack Investigation](./05-Command-Injection-Investigation.md)

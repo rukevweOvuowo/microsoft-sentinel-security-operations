@@ -1,8 +1,8 @@
 # Command Injection Investigation Report
 
 **Author:** Ovuowo Rukevwe  
-**Role:** SOC Analyst (Portfolio Project)  
-**Platform:** Microsoft Sentinel  
+**Role:** SOC Analyst (Security Home Lab Project)  
+**Platform:** Microsoft Sentinel / Microsoft Defender XDR  
 **Date of Investigation:** 17 July 2026  
 **Incident Severity:** Critical  
 **Incident Status:** Closed – Attempt Detected, No Confirmed Command Execution
@@ -37,6 +37,45 @@ The incident was classified as:
 
 ![alt text](../Images/05-Command-Injection/Incident.png)
 
+
+---
+
+# Detection Logic
+
+Microsoft Sentinel detected the command injection attempt by analyzing web application traffic from:
+
+- Nginx Access Logs
+- Zeek HTTP Logs
+- Suricata IDS
+
+The detection logic searched for common command execution indicators including:
+
+
+```
+;
+|
+&&
+||
+$( )
+`
+
+```
+
+and system commands such as:
+
+
+```
+whoami
+id
+uname
+cat
+curl
+wget
+bash
+
+```
+
+The alert confidence was increased by validating the activity across multiple independent security telemetry sources.
 
 ---
 
@@ -106,6 +145,39 @@ The investigation followed the following process:
 4. Analyze HTTP requests and payload patterns.
 5. Determine whether command execution occurred.
 6. Assess impact and classify the incident.
+
+---
+
+# Investigation Questions
+
+The investigation focused on answering the following SOC questions:
+
+### 1. Who initiated the attack?
+
+- What source IP generated the requests?
+- Which application was targeted?
+
+### 2. What was the attacker attempting?
+
+- Were command execution patterns present?
+- Which commands or payload indicators were observed?
+
+### 3. Did exploitation succeed?
+
+- Was an operating system command executed?
+- Was a reverse shell established?
+- Were files modified or accessed?
+
+### 4. Was additional malicious activity observed?
+
+The source IP was investigated for related activity including:
+
+- SQL Injection
+- XSS attempts
+- File discovery
+- Authentication attacks
+- Malware activity
+
 
 ---
 
@@ -305,7 +377,7 @@ Suricata provided additional confirmation that suspicious command execution patt
 
 ---
 
-# Indicators of Compromise
+# Indicators and Attack Artifacts
 
 | IOC Type | Indicator | Description |
 |---|---|---|
@@ -329,6 +401,22 @@ Suricata provided additional confirmation that suspicious command execution patt
 
 ---
 
+# Lessons Learned
+
+The investigation highlighted the following security considerations:
+
+- User-controlled input should never be passed directly to operating system commands.
+
+- Detection rules should monitor both command separators and common system command patterns.
+
+- Multiple telemetry sources improve confidence when validating web application attacks.
+
+- Command injection attempts should be investigated for possible follow-on activity such as reverse shells or malware execution.
+
+- Web applications should follow secure coding practices and least privilege principles.
+
+---
+
 # Final Incident Classification
 
 **Incident Type:** Web Application Attack  
@@ -341,3 +429,12 @@ Suricata provided additional confirmation that suspicious command execution patt
 The investigation confirmed a command injection attempt targeting the web application. Multiple telemetry sources detected suspicious command execution indicators originating from 192.168.138.130. However, no evidence of successful command execution or system compromise was identified.
 
 **Resolution: Attempt Detected – No Confirmed Command Execution**
+
+
+Previous:
+
+[01 - Phishing Email Investigation](./04-XSS-Investigation.md)
+
+Next:
+
+[03 - Web Application Attack Investigation](./06)

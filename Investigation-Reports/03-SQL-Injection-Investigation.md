@@ -1,5 +1,14 @@
 # SQL Injection Incident Investigation Report
 
+**Author:** Ovuowo Rukevwe  
+**Role:** SOC Analyst (Security Home Lab Project)  
+**Platform:** Microsoft Sentinel / Microsoft Defender XDR  
+**Date of Investigation:** 17 July 2026  
+**Incident Severity:** Critical  
+**Incident Status:** Closed – Attempt Detected, No Confirmed Command Execution
+
+---
+
 
 # Incident Overview
 
@@ -34,6 +43,42 @@ The malicious activity originated from source IP **192.168.138.130** and targete
 ![alt text](../Images/03-SQL-Injection/1.png)
 
 
+# Detection Logic
+
+Microsoft Sentinel detected the SQL Injection attempt through correlation of web application telemetry from multiple sources:
+
+- Nginx Access Logs
+- Zeek HTTP Logs
+- Suricata IDS Alerts
+
+The detection logic identified suspicious SQL injection patterns within HTTP requests, including:
+
+```
+' OR 1=1--
+```
+
+The payload was URL encoded:
+
+```
+%27%20OR%201%3D1--
+```
+
+After decoding using CyberChef, the payload was confirmed as:
+
+```
+' OR 1=1--
+```
+
+The detection was based on:
+
+- SQL logical operators
+- SQL comment indicators
+- Suspicious query manipulation patterns
+- Abnormal HTTP request parameters
+
+Detection confidence was increased through cross-validation across independent telemetry sources.
+
+
 # Investigation Objective
 
 The objective of this investigation was to determine whether the Microsoft Sentinel alert represented a genuine SQL Injection attack, identify the affected assets, determine the scope of the activity, evaluate the impact, and recommend appropriate containment and remediation actions.
@@ -53,6 +98,46 @@ The objective of this investigation was to determine whether the Microsoft Senti
 
 The encode URL was decoded using cyberchef
 
+
+---
+
+# Investigation Questions
+
+During the investigation, the following SOC investigation questions were addressed:
+
+### 1. Who initiated the attack?
+
+- What source IP generated the malicious request?
+- Was the source internal or external?
+- Was an authenticated user involved?
+
+### 2. What was the attacker attempting?
+
+- What payload was delivered?
+- Which application endpoint was targeted?
+- Was the payload consistent with SQL Injection techniques?
+
+### 3. When did the activity occur?
+
+- Was this a single request or repeated activity?
+- Did additional attacks occur from the same source?
+
+### 4. Did exploitation succeed?
+
+- Was database access achieved?
+- Were records retrieved?
+- Was authentication bypass successful?
+- Was sensitive information exposed?
+
+### 5. Was additional malicious activity observed?
+
+The source IP was investigated for related activity including:
+
+- Cross-Site Scripting attempts
+- Command Injection attempts
+- Path Traversal attempts
+- Brute Force activity
+- Sensitive file discovery
 
 ---
 
@@ -289,7 +374,7 @@ Current impact is assessed as:
 
 ---
 
-# Indicators of Compromise (IOCs)
+# Indicators and Attack Artifacts
 
 The following Indicators of Compromise (IOCs) were identified during the investigation and can be used for threat hunting, correlation, and future detections.
 
@@ -302,6 +387,24 @@ The following Indicators of Compromise (IOCs) were identified during the investi
 | User-Agent | `curl/8.13.0` |
 | HTTP Response Status | `500 Internal Server Error` |
 | MITRE ATT&CK Technique | T1190 – Exploit Public-Facing Application |
+
+---
+
+# Lessons Learned
+
+The investigation highlighted several important security considerations:
+
+- Web applications should implement strong input validation and parameterized queries to prevent SQL Injection attacks.
+
+- Successful detection requires correlation between multiple telemetry sources rather than relying on a single log source.
+
+- Encoded payloads should always be decoded during investigation because attackers frequently obfuscate malicious requests.
+
+- HTTP error responses such as `500 Internal Server Error` should be investigated because they may indicate attempted exploitation.
+
+- Detection rules should continuously be tuned to identify emerging attack patterns while reducing false positives.
+
+- Web application logs provide valuable visibility into attacker behavior and should be integrated into SIEM platforms.
 
 ---
 
@@ -319,10 +422,12 @@ The observed HTTP **500 Internal Server Error** responses indicate that the mali
 
 ---
 
+The next objective is determining whether additional malicious activity originated from the same source...
 
-# The next objective is determining whether additional malicious activity originated from the same source such as:
-- XSS attempts
-- Path Traversal
-- Sensitive File Discovery
-- Command Injection
-- Brute Force Login Attempts
+Previous:
+
+[01 - Phishing Email Investigation](./02-Brute-Force-Attack-Investigation.md)
+
+Next:
+
+[03 - Web Application Attack Investigation](./04-XSS-Investigation.md)
