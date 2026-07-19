@@ -16,8 +16,11 @@ Microsoft Defender XDR and Microsoft Sentinel detected multiple authentication a
 
 Two separate brute-force investigations were analyzed:
 
-1. **Case 1 – Failed Brute Force Attempt (False Positive)**
-2. **Case 2 – Successful Authentication Following Brute Force Activity (True Positive)**
+1. **Case 1 – Severity: Medium**  
+   Failed Brute Force Attempt *(False Positive)*
+
+2. **Case 2 – Severity: High**  
+   Successful Authentication Following Brute Force Activity *(True Positive)*
 
 The investigation involved reviewing:
 
@@ -128,9 +131,9 @@ The investigation checked for:
 
 ## Incident Summary
 
-Microsoft Defender XDR detected repeated failed authentication attempts targeting the West-EU server.
+Microsoft Defender XDR detected a repeated failed authentication attempts targeting the West-EU server.
 
-![Incident](../Images/02-Brute-Force-Attack-Investigation.md/incident.png)
+![alt text](../Images/02-Brute-Force/incident.png)
 
 
 | Attribute | Details |
@@ -154,8 +157,8 @@ Findings:
 - Location: United Kingdom
 - Multiple security vendors flagged the IP as suspicious
 
-![Threat Intelligence](../Images/02-Brute-Force-Attack-Investigation.md/4FD.png)
 
+![alt text](../Images/02-Brute-Force/3.png)
 ---
 
 # Authentication Log Analysis
@@ -170,13 +173,12 @@ Observed:
 
 4625 - Failed Logon Attempt
 
-
-![Failed Logons](../Images/02-Brute-Force-Attack-Investigation.md/1FD.png)
+![alt text](../Images/02-Brute-Force/01.png)
 
 
 No successful authentication events were identified.
 
-![No Successful Login](../Images/02-Brute-Force-Attack-Investigation.md/2FD.png)
+![alt text](../Images/02-Brute-Force/02.png)
 
 ---
 
@@ -213,7 +215,6 @@ No unauthorized access occurred.
 
 Microsoft Defender XDR detected repeated authentication attempts followed by successful logins against the West-EU server.
 
-![Incident](../Images/02-Brute-Force-Attack-Investigation.md/1P.png)
 
 | Attribute | Details |
 |---|---|
@@ -238,6 +239,8 @@ Multiple external IP addresses were associated with brute-force activity.
 
 ---
 
+![alt text](../Images/02-Brute-Force/4.png)
+
 # Successful Authentication Evidence
 
 The investigation confirmed successful authentication events from:
@@ -249,12 +252,6 @@ The investigation confirmed successful authentication events from:
 
 34.77.166.77
 
-
-
-Example:
-
-![Successful Authentication](../Images/02-Brute-Force-Attack-Investigation.md/5P.png)
-
 ---
 
 # Threat Intelligence Findings
@@ -263,13 +260,19 @@ Example:
 
 Findings:
 
-- Registered to Empresa Nacional de Telecomunicaciones Sociedad Anonima (ENTEL)
-- Located in Bolivia
-- Historical malicious activity observed
+- Registered to Empresa Nacional de Telecomunicaciones Sociedad Anonima (ENTEL), Located in Bolivia, Historical malicious activity observed.
+
+![alt text](../Images/02-Brute-Force/03.png)
+
+- Multiple failed authentication attempts.
+
+![alt text](../Images/02-Brute-Force/4.png)
+
 - Successful authentication detected
+![alt text](../Images/02-Brute-Force/6.png)
 
-![Threat Intelligence](../Images/02-Brute-Force-Attack-Investigation.md/2P.png)
-
+As seen on the incident portal
+![alt text](../Images/02-Brute-Force/5.png)
 
 ---
 
@@ -286,11 +289,6 @@ SSH
 RDP
 Web Services
 
-
-
-
-Successful authentication detected.
-
 ---
 
 ## 84.192.175.75
@@ -299,6 +297,7 @@ Findings:
 
 - Multiple failed authentication attempts.
 - Followed by successful authentication.
+
 
 ---
 
@@ -314,13 +313,13 @@ Reviewed:
 
 No evidence was identified for:
 
-❌ Privilege escalation  
-❌ Malware execution  
-❌ PowerShell abuse  
-❌ Credential dumping  
-❌ Persistence creation  
-❌ Lateral movement  
-❌ Data exfiltration  
+- Privilege escalation  
+- Malware execution  
+- PowerShell abuse  
+- Credential dumping  
+- Persistence creation  
+- Lateral movement  
+- Data exfiltration  
 
 ---
 
@@ -373,7 +372,7 @@ Actions performed:
 - Performed threat intelligence enrichment.
 - Blocked suspicious IP addresses.
 
-![IP Blocking](../Images/02-Brute-Force-Attack-Investigation.md/In.png)
+![alt text](../Images/02-Brute-Force/In.png)
 
 
 ---
@@ -420,11 +419,11 @@ Although valid credentials were used, no additional malicious activity was ident
 
 ## Case 1
 
-✅ Closed – False Positive
+- Closed – False Positive
 
 ## Case 2
 
-✅ Closed – True Positive
+- Closed – True Positive
 
 ---
 
