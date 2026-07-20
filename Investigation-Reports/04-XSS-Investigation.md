@@ -341,8 +341,8 @@ Although the payloads successfully reached the application, there was no evidenc
 
 Previous:
 
-[01 - SQL Injection Investigation](./03-SQL-Injection-Investigation.md)
+[03 - SQL Injection Investigation](./03-SQL-Injection-Investigation.md)
 
 Next:
 
-[03 - Command Injection Investigation](./05-Command-Injection-Investigation.md)
+[05 - Command Injection Investigation](./05-Command-Injection-Investigation.md)
