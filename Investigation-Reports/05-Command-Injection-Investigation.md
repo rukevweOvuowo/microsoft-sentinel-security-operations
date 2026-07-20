@@ -432,6 +432,6 @@ The investigation confirmed a command injection attempt targeting the web applic
 
 Previous:
 
-[01 - Phishing Email Investigation](./04-XSS-Investigation.md)
+[01 - XSS Investigation](./04-XSS-Investigation.md)
 
 Next:

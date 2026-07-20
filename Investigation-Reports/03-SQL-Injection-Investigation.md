@@ -426,8 +426,8 @@ The next objective is determining whether additional malicious activity originat
 
 Previous:
 
-[01 - Brute Force Investigation](./02-Brute-Force-Attack-Investigation.md)
+[02 - Brute Force Investigation](./02-Brute-Force-Attack-Investigation.md)
 
 Next:
 
-[03 - XSS Investigation](./04-XSS-Investigation.md)
+[04 - XSS Investigation](./04-XSS-Investigation.md)
