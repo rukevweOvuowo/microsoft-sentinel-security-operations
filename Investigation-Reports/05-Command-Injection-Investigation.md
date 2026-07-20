@@ -1,7 +1,7 @@
 # 05 - Command Injection Investigation
 
 **Author:** Ovuowo Rukevwe  
-**Role:** SOC Analyst (Security Home Lab Project)  
+**Role:** SOC Analyst (Security Home Lab)  
 **Platform:** Microsoft Sentinel / Microsoft Defender XDR  
 **Date of Investigation:** 17 July 2026  
 **Incident Severity:** Critical  
@@ -435,3 +435,5 @@ Previous:
 [04 - XSS Investigation](./04-XSS-Investigation.md)
 
 Next:
+
+[06-File-upload-Investigation](./06-File-upload-Investigation.md])

@@ -1,7 +1,7 @@
 # 03 - SQL Injection Incident Investigation
 
 **Author:** Ovuowo Rukevwe  
-**Role:** SOC Analyst (Security Home Lab Project)  
+**Role:** SOC Analyst (Security Home Lab)  
 **Platform:** Microsoft Sentinel / Microsoft Defender XDR  
 **Date of Investigation:** 17 July 2026  
 **Incident Severity:** Critical  

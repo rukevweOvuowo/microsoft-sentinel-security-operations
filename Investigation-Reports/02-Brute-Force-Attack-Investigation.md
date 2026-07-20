@@ -1,7 +1,7 @@
 # 02 – Brute Force Attack Investigation
 
 **Author:** Ovuowo Rukevwe  
-**Role:** SOC Analyst (Security Home Lab Project)  
+**Role:** SOC Analyst (Security Home Lab)    
 **Platform:** Microsoft Sentinel / Microsoft Defender XDR   
 **Date of Investigation:** 6 July 2026  
 **Incident Category:** Credential Access  

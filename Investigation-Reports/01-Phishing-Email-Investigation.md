@@ -1,7 +1,7 @@
 # 01 – Phishing Email Investigation
 
 **Author:** Ovuowo Rukevwe  
-**Role:** SOC Analyst (Security Home Lab Project)  
+**Role:** SOC Analyst (Security Home Lab)  
 **Platform:** Microsoft Sentinel / Microsoft Defender XDR  
 **Date of Investigation:** 2 July 2026  
 **Incident Severity:** High  
