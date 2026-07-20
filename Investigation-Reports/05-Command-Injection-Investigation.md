@@ -436,4 +436,4 @@ Previous:
 
 Next:
 
-[06-File-upload-Investigation](./06-File-upload-Investigation.md])
+[06-Suspicious-File-Upload-Investigation](./06-Suspicious-File-Upload-Investigation.md)

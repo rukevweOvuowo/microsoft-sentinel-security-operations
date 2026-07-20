@@ -391,7 +391,7 @@ No evidence confirmed successful persistence, lateral movement, or completed dat
 Final Status: Closed – Web Shell Activity Confirmed and Contained
 
 
-Previous:
+Previous: 
 
 [05-Command-Injection-Investigation](./05-Command-Injection-Investigation.md)
 
